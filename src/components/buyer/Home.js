@@ -15,7 +15,7 @@ const Home = () => {
           id="top"
           data-section="section1"
         >
-          <video autoplay loop muted id="bg-video">
+          <video autoPlay loop muted id="bg-video">
             <source src={bgV} type="video/mp4" />
           </video>
 

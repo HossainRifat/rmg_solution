@@ -6,12 +6,23 @@ import reportWebVitals from "./reportWebVitals";
 import Home from "./components/buyer/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Login from "./components/buyer/Login";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
+        {/* #########################  FOR ADMIN  ######################### */}
+        {/* admin routes here */}
+
+        {/* #########################  FOR BUYER  ######################### */}
+        {/* buyer routes here */}
         <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />}></Route>
+
+        {/* #########################  FOR SELLER  ######################### */}
+        {/* seller routes here */}
       </Routes>
     </Router>
   </React.StrictMode>
