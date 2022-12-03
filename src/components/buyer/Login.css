@@ -109,12 +109,8 @@ label {
 .reg-border p {
   margin-top: -20px;
   margin-bottom: 10px;
-  color: rgb(205, 205, 205);
-  font-weight: 400;
-}
-
-.login-output {
-  color: red;
+  color: rgb(255, 73, 73);
+  text-shadow: white;
   font-weight: 600;
   text-align: center;
 }
@@ -145,10 +141,6 @@ table {
   border-radius: 6px;
   border-color: aliceblue;
   /* padding: 10px; */
-}
-
-.reg-border span {
-  color: red;
 }
 
 .reg-border input[type="checkbox"] {
