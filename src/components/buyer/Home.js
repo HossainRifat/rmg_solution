@@ -48,7 +48,7 @@ const Home = () => {
                     </p>
                     <div className="main-button-red">
                       <div className="scroll-to-section">
-                        <Link to="/registration/buyer">Hire Garments</Link>
+                        <Link to="/buyer/registration">Hire Garments</Link>
                       </div>
                     </div>
                     <div className="main-button-blur">

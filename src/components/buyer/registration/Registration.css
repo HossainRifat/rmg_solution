@@ -1,11 +1,41 @@
+:root {
+  --first-color: #0e2431;
+  --second-color: #6a59d1;
+  --third-color: #777;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--first-color);
+  background: var(--body-bg-color);
+  transition: 0.5sec ease;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
 .reg {
-  margin-top: 100px;
   position: relative;
   max-width: 1250px;
-
   margin-left: auto;
   margin-right: auto;
-  padding: 4rem 0rem;
+  padding: 4rem 2rem;
   flex-direction: column;
 }
 
@@ -63,7 +93,7 @@ input[type="date"] {
   padding: 3px;
 }
 
-.reg-border button {
+.reg-border input[type="submit"] {
   padding: 7px 23px;
   background: aliceblue;
   color: var(--second-color);
@@ -71,7 +101,7 @@ input[type="date"] {
   border: aliceblue;
 }
 
-.reg-border button:hover {
+.reg-border input[type="submit"]:hover {
   font-weight: 500;
   scale: 1.02;
 }
@@ -106,8 +136,12 @@ label {
 .reg-border p {
   margin-top: -20px;
   margin-bottom: 10px;
-  color: rgb(255, 73, 73);
-  text-shadow: white;
+  color: rgb(205, 205, 205);
+  font-weight: 400;
+}
+
+.login-output {
+  color: red;
   font-weight: 600;
   text-align: center;
 }
@@ -140,33 +174,15 @@ table {
   /* padding: 10px; */
 }
 
+.reg-border span {
+  color: red;
+}
+
 .reg-border input[type="checkbox"] {
   margin-bottom: 20px;
 }
 
-.form-check-label {
-  margin-left: 10px;
-}
-
-#bg-img {
-  min-width: 100%;
-  min-height: 100vh;
-  max-width: 100%;
-  max-height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
-
-#bg-img::-webkit-media-controls {
-  display: none !important;
-}
-
-.img-overlay {
-  position: absolute;
-  background-color: rgba(31, 39, 43, 0.75);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
+.gender label {
+  margin-left: 5px;
+  margin-right: 10px;
 }

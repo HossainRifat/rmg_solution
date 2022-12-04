@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Home from "./components/buyer/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import "./index.css";
+import App from "./App";
+import Home from "./components/buyer/Home";
 import Login from "./components/buyer/Login";
+import Registration from "./components/buyer/registration/Registration";
+import Registration2 from "./components/buyer/registration/Registration2";
+import Registration3 from "./components/buyer/registration/Registration3";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +23,9 @@ root.render(
         {/* buyer routes here */}
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/buyer/registration" element={<Registration />}></Route>
+        <Route path="/buyer/registration2" element={<Registration2 />}></Route>
+        <Route path="/buyer/registration3" element={<Registration3 />}></Route>
 
         {/* #########################  FOR SELLER  ######################### */}
         {/* seller routes here */}
