@@ -10,6 +10,9 @@ import Login from "./components/buyer/Login";
 import Registration from "./components/buyer/registration/Registration";
 import Registration2 from "./components/buyer/registration/Registration2";
 import Registration3 from "./components/buyer/registration/Registration3";
+import Dashboard from "./components/buyer/dashboard/Dashboard";
+import Profile from "./components/buyer/dashboard/Profile";
+import Security from "./components/buyer/dashboard/Security";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,6 +29,9 @@ root.render(
         <Route path="/buyer/registration" element={<Registration />}></Route>
         <Route path="/buyer/registration2" element={<Registration2 />}></Route>
         <Route path="/buyer/registration3" element={<Registration3 />}></Route>
+        <Route path="/buyer/dashboard" element={<Dashboard />}></Route>
+        <Route path="/buyer/profile/get" element={<Profile />}></Route>
+        <Route path="/buyer/security/get" element={<Security />}></Route>
 
         {/* #########################  FOR SELLER  ######################### */}
         {/* seller routes here */}
