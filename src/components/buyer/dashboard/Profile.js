@@ -19,20 +19,30 @@ import {
   faNewspaper,
   faUser,
 } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
   const [buyer, setBuyer] = useState([]);
-
+  let navigate = useNavigate([]);
+  
   useEffect(() => {
     buyerAxiosConfig
-      .get("/buyer/dashboard")
+      .get("/buyer/profile/get")
       .then((resp) => {
-        console.log(resp.data);
-        setBuyer(resp.data);
+        if(resp.status == 200){
+          console.log(resp.data);
+          setBuyer(resp.data);
+        }
+        else{
+          console.log(resp.data);
+          navigate("/login");
+        }
+        
       })
       .catch((err) => {
         console.log(err);
+        navigate("/login");
       });
   }, []);
 
@@ -269,7 +279,7 @@ const Profile = () => {
                             />
                           </li>
 
-                          <li className="list-group-item border-0 ps-0 pb-0">
+                          {/* <li className="list-group-item border-0 ps-0 pb-0">
                             <strong className="text-dark text-sm">
                               Social:
                             </strong>
@@ -284,7 +294,7 @@ const Profile = () => {
                               className="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0"
                               to=""
                             >
-                              <i className="fa-lg"> <FontAwesomeIcon></FontAwesomeIcon></i>
+                              <i className="fa-lg"></i>
                             </Link>
                             <Link
                               className="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0"
@@ -292,7 +302,7 @@ const Profile = () => {
                             >
                               <i className="fab fa-instagram fa-lg"></i>
                             </Link>
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
                     </div>

@@ -27,9 +27,7 @@ const Login = () => {
       axios
         .post("http://127.0.0.1:8000/api/login", obj)
         .then((resp) => {
-          if (resp.status == 203) {
-            setStatus(resp.data);
-          } else {
+          if (resp.status == 200) {
             let user = {
               userId: resp.data.all_users_id,
               access_token: resp.data.token,
@@ -37,9 +35,14 @@ const Login = () => {
             localStorage.setItem("buyer", JSON.stringify(user));
             setStatus("Correct");
             navigate('/buyer/profile/get');
+            
           }
-
-          
+          else if(resp.status == 203){
+            setStatus(resp.data);
+          }
+          else{
+            console.log(resp.data);
+          }
           
           //console.log(localStorage.getItem("user"));
           
