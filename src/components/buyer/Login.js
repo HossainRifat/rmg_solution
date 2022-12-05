@@ -4,15 +4,17 @@ import Head from "./header/Header";
 import "./Login.css";
 import bgI from "./img/login.jpg";
 import { browserName, osName } from "react-device-detect";
+import { Route, useNavigate, useHis } from "react-router-dom";
 
 const Login = () => {
   let [status, setStatus] = useState("");
   let [token, setToken] = useState("");
   let [email, setName] = useState("");
   let [password, setPassword] = useState("");
+  let navigate = useNavigate([]);
 
   const loginSubmit = () => {
-    let ip = "";
+    
     axios.get("https://api.ipify.org/?format=json").then((resp_ip) => {
       let obj = {
         email: email,
@@ -28,15 +30,19 @@ const Login = () => {
           if (resp.status == 203) {
             setStatus(resp.data);
           } else {
+            let user = {
+              userId: resp.data.all_users_id,
+              access_token: resp.data.token,
+            };
+            localStorage.setItem("buyer", JSON.stringify(user));
             setStatus("Correct");
+            navigate('/buyer/profile/get');
           }
 
-          let user = {
-            userId: resp.data.all_users_id,
-            access_token: resp.data.token,
-          };
-          localStorage.setItem("buyer", JSON.stringify(user));
-          console.log(localStorage.getItem("user"));
+          
+          
+          //console.log(localStorage.getItem("user"));
+          
         })
         .catch((err) => {
           console.log(err);

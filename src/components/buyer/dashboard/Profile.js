@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Dashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header2 from "../header/Header2";
+import buyerAxiosConfig from "./buyerAxiosConfig";
+import { useEffect, useState } from "react";
 import {
   faBagShopping,
   faCartShopping,
@@ -20,6 +22,20 @@ import {
 import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const [buyer, setBuyer] = useState([]);
+
+  useEffect(() => {
+    buyerAxiosConfig
+      .get("/buyer/dashboard")
+      .then((resp) => {
+        console.log(resp.data);
+        setBuyer(resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <div>
@@ -33,14 +49,14 @@ const Profile = () => {
               aria-hidden="true"
               id="iconSidenav"
             ></i>
-            <a
+            <Link
               className="navbar-brand m-0"
-              href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+              to=""
               target="_blank"
             >
               {/* {{-- <img src="../assets/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo"> --}} */}
               <span className="ms-1 font-weight-bold">My Dashboard</span>
-            </a>
+            </Link>
           </div>
           <hr className="horizontal dark mt-0 mb-2" />
           <div
@@ -153,7 +169,7 @@ const Profile = () => {
                 <div className="col-auto">
                   <div className="avatar avatar-xl position-relative">
                     <img
-                      src="/storage/uploads/{{$user->photo}}"
+                      // src="/storage/uploads/{{$user->photo}}"
                       alt="profile_image"
                       className="w-100 border-radius-lg shadow-sm"
                     />
@@ -161,7 +177,9 @@ const Profile = () => {
                 </div>
                 <div className="col-auto my-auto">
                   <div className="h-100">
-                    <h5 className="mb-1">Md. Rifat Hossain</h5>
+                    <h5 className="mb-1">
+                      {buyer.first_name} {buyer.last_name}
+                    </h5>
                     <p className="mb-0 font-weight-normal text-sm">
                       CEO / Co-Founder
                     </p>
@@ -192,60 +210,60 @@ const Profile = () => {
                           <li className="list-group-item border-0 ps-0 pt-0 text-sm">
                             <strong className="text-dark" readOnly>
                               First Name <span>*</span>
-                            </strong>{" "}
-                            &nbsp;{" "}
+                            </strong>
+                            &nbsp;
                             <input
                               type="text"
                               name="first_name"
-                              value="{{$user->first_name}}"
+                              value={buyer.first_name}
                               readOnly
                             />
                           </li>
                           <li className="list-group-item border-0 ps-0 pt-0 text-sm">
                             <strong className="text-dark">
                               Last Name <span>*</span>
-                            </strong>{" "}
-                            &nbsp;{" "}
+                            </strong>
+                            &nbsp;
                             <input
                               type="text"
                               name="last_name"
-                              value="{{$user->last_name}}"
+                              value={buyer.last_name}
                               readOnly
                             />
                           </li>
                           <li className="list-group-item border-0 ps-0 text-sm">
                             <strong className="text-dark">
                               Mobile <span>*</span>
-                            </strong>{" "}
-                            &nbsp;{" "}
+                            </strong>
+                            &nbsp;
                             <input
                               type="text"
                               name="phone"
                               readOnly
-                              value="{{$user->phone}}"
+                              value={buyer.phone}
                             />
                           </li>
                           <li className="list-group-item border-0 ps-0 text-sm">
                             <strong className="text-dark">
                               Email <span>*</span>
-                            </strong>{" "}
-                            &nbsp;{" "}
+                            </strong>
+                            &nbsp;
                             <input
                               type="text"
                               name="phone"
-                              value="{{$user->email}}"
+                              value={buyer.email}
                               readOnly
                             />
                           </li>
                           <li className="list-group-item border-0 ps-0 text-sm">
                             <strong className="text-dark">
                               Date of birth <span>*</span>
-                            </strong>{" "}
-                            &nbsp;{" "}
+                            </strong>
+                            &nbsp;
                             <input
                               type="date"
                               name="dob"
-                              value="{{$user->dob}}"
+                              value={buyer.dob}
                               //   style="border: solid; border-color: rgb(231, 232, 230);"
                               readOnly
                             />
@@ -256,24 +274,24 @@ const Profile = () => {
                               Social:
                             </strong>
                             &nbsp;
-                            <a
+                            <Link
                               className="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0"
-                              href="javascript:;"
+                              to=""
                             >
                               <i className="fab fa-facebook fa-lg"></i>
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                               className="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0"
-                              href="javascript:;"
+                              to=""
                             >
-                              <i className="fab fa-twitter fa-lg"></i>
-                            </a>
-                            <a
+                              <i className="fa-lg"> <FontAwesomeIcon></FontAwesomeIcon></i>
+                            </Link>
+                            <Link
                               className="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0"
-                              href="javascript:;"
+                              to=""
                             >
                               <i className="fab fa-instagram fa-lg"></i>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -287,23 +305,18 @@ const Profile = () => {
                             {/* <!-- <h6 className="mb-0">Profile Information</h6> --> */}
                           </div>
                           <div className="col-md-4 text-end">
-                            <a href="/buyer/profile/edit">
+                            <Link to="/buyer/profile/edit">
                               <i
                                 className="fas fa-user-edit text-secondary text-sm"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="top"
                                 title="Edit Profile"
                               ></i>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
                       <div className="profile-card p-1">
-                        {/* <!-- <p className="text-sm">
-                          <textarea name="" rows="3" style="width: 98%;">Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).</textarea>
-                          
-                        </p> -->
-                        <!-- <hr className="horizontal gray-light my-4"> --> */}
                         <ul className="list-group">
                           <li className="list-group-item border-0 ps-0 pt-7 text-sm">
                             <strong className="text-dark">
@@ -313,19 +326,19 @@ const Profile = () => {
                             <input
                               type="text"
                               name="nid"
-                              value="{{$user->nid}}"
+                              value={buyer.nid}
                               readOnly
                             />
                           </li>
                           <li className="list-group-item border-0 ps-0 text-sm">
                             <strong className="text-dark">
                               Passport number
-                            </strong>{" "}
+                            </strong>
                             &nbsp;
                             <input
                               type="text"
                               name="passport"
-                              value="{{$user->passport}}"
+                              value={buyer.passport}
                               readOnly
                             />
                           </li>
@@ -339,10 +352,9 @@ const Profile = () => {
                               name="address"
                               rows="6"
                               //   style="width: 100%;"
+                              value={buyer.address}
                               readOnly
-                            >
-                              Address
-                            </textarea>
+                            ></textarea>
                           </li>
                         </ul>
                       </div>
