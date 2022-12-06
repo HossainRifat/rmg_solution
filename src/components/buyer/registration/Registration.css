@@ -174,7 +174,10 @@ table {
   /* padding: 10px; */
 }
 
-.reg-border span {
+.dp p{
+  margin-top: 1px;
+}
+.reg-border span{
   color: red;
 }
 
