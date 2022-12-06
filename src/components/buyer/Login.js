@@ -23,6 +23,7 @@ const Login = () => {
         device: browserName + " on " + osName,
       };
       console.log(obj);
+      console.log(JSON.stringify(obj));
 
       axios
         .post("http://127.0.0.1:8000/api/login", obj)
