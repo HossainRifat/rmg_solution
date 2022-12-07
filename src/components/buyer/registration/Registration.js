@@ -23,6 +23,7 @@ const schema = yup.object({
 });
 
 const Registration = () => {
+
   let [first_name, set_first_name] = useState("");
   let [last_name, set_last_name] = useState("");
   let [dob, set_dob] = useState("");
@@ -39,7 +40,29 @@ const Registration = () => {
   console.log(errors);
 
   const formSubmit = (data) => {
-    console.log(data);
+    console.log(JSON.stringify(data));
+    axios
+        .post("http://127.0.0.1:8000/api/buyer/registration1",data)
+        .then((resp) => {
+          if (resp.status == 200) {
+            console.log(resp.data);
+            localStorage.setItem("emailCode", resp.data);
+            localStorage.setItem("reg1", JSON.stringify(data));
+            alert("Verify your email to continue");
+            <Link to="https://mail.google.com/mail/"></Link>
+            //navigate('/buyer/registration2');
+          }
+          else if(resp.status == 203){
+            console.log(resp.data);
+          }
+          else{
+            console.log(resp.data);
+          }
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
   
   // const regSubmit = () => {
@@ -55,24 +78,7 @@ const Registration = () => {
 
   //   console.log(obj);
 
-  //   axios
-  //       .post("http://127.0.0.1:8000/api/buyer/registration1",obj)
-  //       .then((resp) => {
-  //         if (resp.status == 200) {
-  //           console.log(resp.data);
-  //           navigate('/buyer/registration2');
-  //         }
-  //         else if(resp.status == 203){
-  //           console.log(resp.data);
-  //         }
-  //         else{
-  //           console.log(resp.data);
-  //         }
-
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
+    
   // }
 
 

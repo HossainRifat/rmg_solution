@@ -27,7 +27,7 @@ root.render(
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/buyer/registration" element={<Registration />}></Route>
-        <Route path="/buyer/registration2" element={<Registration2 />}></Route>
+        <Route path="/buyer/registration2/:id" element={<Registration2 />}></Route>
         <Route path="/buyer/registration3" element={<Registration3 />}></Route>
         <Route path="/buyer/dashboard" element={<Dashboard />}></Route>
         <Route path="/buyer/profile/get" element={<Profile />}></Route>
