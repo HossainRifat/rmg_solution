@@ -2,7 +2,6 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Dashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import {
   faBagShopping,
   faCartShopping,
@@ -21,9 +20,18 @@ import {
 
 import Header2 from "../header/Header2";
 import { Link } from "react-router-dom";
+import buyerAxiosConfig from "./buyerAxiosConfig";
+import { useEffect, useState } from "react";
+import {useNavigate } from "react-router-dom";
+
 
 const Security = () => {
   const [passwordShown, setPasswordShown] = useState(false);
+  let navigate = useNavigate([]);
+
+  const [buyer, setBuyer] = useState([]);
+  const [login, setLogin] = useState([]);
+  const [loginCount, setLoginCount] = useState([]);
 
   // Password toggle handler
   const togglePassword = () => {
@@ -31,6 +39,28 @@ const Security = () => {
     // inverse the boolean state of passwordShown
     setPasswordShown(!passwordShown);
   };
+
+  useEffect(() => {
+    buyerAxiosConfig
+      .get("/buyer/security/get")
+      .then((resp) => {
+        if(resp.status == 200){
+          console.log(resp.data.login.length);
+          setBuyer(resp.data.user);
+          setLogin(resp.data.login);
+          setLoginCount(resp.data.login.length);
+        }
+        else{
+          console.log(resp.data);
+          navigate("/login");
+        }
+        
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+      });
+  }, []);
 
   return (
     <div>
@@ -243,7 +273,7 @@ const Security = () => {
                             $i += 1;
                         }
                     } */}
-                      <span className="font-weight-bold">'.$i.'</span>
+                      <span className="font-weight-bold">{loginCount+" active logins "}</span>
 
                       <span>
                         <a href="" className="text-danger text-bold">
@@ -254,8 +284,8 @@ const Security = () => {
                   </div>
                   <div className="card-body p-3">
                     <div className="timeline timeline-one-side order-history-body">
-                      {/* @foreach ($all_user->logged_session as $item)
-                        @if ($item->logout_time == "NULL") */}
+                      {login.map(log => (
+
 
                       <div className="timeline-block mb-3">
                         <span className="timeline-step">
@@ -265,21 +295,25 @@ const Security = () => {
                         </span>
                         <div className="timeline-content">
                           <h6 className="text-dark text-sm font-weight-bold mb-0">
-                            Time:
+                            {log.device}
                           </h6>
                           {/* @if ($item->token == Cookie::get('token')) */}
                           {/* <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">This PC</p> */}
                           {/* @else */}
                           <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
+                              {""+log.location}
+                          </p>
+                          <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
                             <a href="/buyer/logout/session/{{$item->token}}">
-                              item token
+                              {"IP "+log.ip}
                             </a>
                           </p>
                           {/* @endif */}
                         </div>
                       </div>
-                      {/* @endif */}
-                      {/* @endforeach */}
+
+                      ))}
+
                     </div>
                   </div>
                 </div>

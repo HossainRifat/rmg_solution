@@ -21,9 +21,52 @@ import Header2 from "../header/Header2";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import {useNavigate } from "react-router-dom";
+import buyerAxiosConfig from "./buyerAxiosConfig";
+
+
 
 const Dashboard = () => {
-  
+  const [buyer, setBuyer] = useState([]);
+  const [order, setOrder] = useState([]);
+  const [checkout, setCheckout] = useState([]);
+  const [money, setMoney] = useState([]);
+  const [post, setPost] = useState([]);
+  const [myPost, setMyPost] = useState([]);
+
+  const [orders, setOrders] = useState([]);
+
+
+
+
+  let navigate = useNavigate([]);
+
+  useEffect(() => {
+    buyerAxiosConfig
+      .get("/buyer/dashboard")
+      .then((resp) => {
+        if(resp.status == 200){
+          setBuyer(resp.data.buyer);
+          setOrder(resp.data.order);
+          setCheckout(resp.data.checkout);
+          setMoney(resp.data.money);
+          setPost(resp.data.post);
+          setBuyer(resp.data.buyer);
+          setOrders(resp.data.user.my_order);
+          setMyPost(resp.data);
+          
+        }
+        else{
+          console.log(resp.data);
+          navigate("/login");
+        }
+        
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+      });
+  }, []);
 
   return (
     <div>
@@ -171,7 +214,7 @@ const Dashboard = () => {
                     </div>
                     <div className="text-end pt-1">
                       <p className="text-sm mb-0 text-capitalize">My Posts</p>
-                      <h4 className="mb-0">post</h4>
+                      <h4 className="mb-0">{post}</h4>
                     </div>
                   </div>
                   <hr className="dark horizontal my-0" />
@@ -197,7 +240,7 @@ const Dashboard = () => {
                     </div>
                     <div className="text-end pt-1">
                       <p className="text-sm mb-0 text-capitalize">My Orders</p>
-                      <h4 className="mb-0">$active_order</h4>
+                      <h4 className="mb-0">{order}</h4>
                     </div>
                   </div>
                   <hr className="dark horizontal my-0" />
@@ -223,7 +266,7 @@ const Dashboard = () => {
                       <p className="text-sm mb-0 text-capitalize">
                         My Checkouts
                       </p>
-                      <h4 className="mb-0">$checkout</h4>
+                      <h4 className="mb-0">{checkout}</h4>
                     </div>
                   </div>
                   <hr className="dark horizontal my-0" />
@@ -250,7 +293,7 @@ const Dashboard = () => {
                     </div>
                     <div className="text-end pt-1">
                       <p className="text-sm mb-0 text-capitalize">My Spends</p>
-                      <h4 className="mb-0">$money</h4>
+                      <h4 className="mb-0">{money}</h4>
                     </div>
                   </div>
                   <hr className="dark horizontal my-0" />
@@ -280,9 +323,9 @@ const Dashboard = () => {
                             ></i>
                             Currently active
                             <span className="font-weight-bold ms-1">
-                              $active_order
+                              {order + " "}
                             </span>
-                            order(s)
+                             orders
                           </p>
                         </div>
                       </div>
@@ -307,25 +350,25 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {/* @foreach ($user->my_order as $item)
-                              @if ($item->status != "done") */}
-                            <tr>
+                            {orders.map(order => (
+                              
+                            <tr key={order.id}>
                               <td>
                                 <div className="d-flex px-2 py-1">
                                   <div></div>
                                   <div className="d-flex flex-column justify-content-center">
-                                    <h6 className="mb-0 text-sm">$itemtitle</h6>
+                                    <h6 className="mb-0 text-sm" >{order.title}</h6>
                                   </div>
                                 </div>
                               </td>
                               <td>
                                 <span className="text-xs font-weight-bold text-secondary">
-                                  delivery_date
+                                  {order.delivery_date}
                                 </span>
                               </td>
                               <td className="align-middle text-center text-sm">
                                 <span className="text-xs font-weight-bold text-secondary">
-                                  price
+                                  {order.price}
                                 </span>
                               </td>
                               <td className="align-middle">
@@ -333,15 +376,15 @@ const Dashboard = () => {
                                   <div className="progress-info">
                                     <div className="progress-percentage">
                                       <span className="text-xs font-weight-bold text-secondary">
-                                        status%
+                                        {order.status}
                                       </span>
                                     </div>
                                   </div>
                                   <div className="progress">
                                     <div
-                                      className="progress-bar bg-gradient-info w-10"
+                                      className={"progress-bar bg-gradient-info w-" + order.status}
                                       role="progressbar"
-                                      aria-valuenow="10"
+                                      aria-valuenow={order.status}
                                       aria-valuemin="0"
                                       aria-valuemax="100"
                                     ></div>
@@ -349,9 +392,7 @@ const Dashboard = () => {
                                 </div>
                               </td>
                             </tr>
-                            {/* @endif
-                            
-                        @endforeach */}
+))}
                           </tbody>
                         </table>
                       </div>
@@ -369,10 +410,8 @@ const Dashboard = () => {
                     </div>
                     <div className="card-body p-3">
                       <div className="timeline timeline-one-side order-history-body">
-                        {/* @foreach ($my_post as $item)
-                    @if ($item->bid)
-                    @foreach ($item->bid as $item2)  
-                      @if ($item2->status == "post") */}
+                        
+                        {/* {myPost.map(post => (                         */}
                         <div className="timeline-block mb-3">
                           <span className="timeline-step">
                             <i className="text-success text-gradient">
@@ -385,7 +424,7 @@ const Dashboard = () => {
                                 href="/buyer/post/details/{{$item2->post->id}}"
                                 className="text-secondary"
                               >
-                                last_name
+                                New Bid
                               </a>
                             </h6>
                             <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
@@ -393,11 +432,8 @@ const Dashboard = () => {
                             </p>
                           </div>
                         </div>
-                        {/* @endif
-                    @endforeach
-                    @endif
-                    
-                    @endforeach */}
+                        {/* ))} */}
+                        
                       </div>
                     </div>
                   </div>
