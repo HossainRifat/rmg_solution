@@ -23,15 +23,26 @@ import { Link } from "react-router-dom";
 import buyerAxiosConfig from "./buyerAxiosConfig";
 import { useEffect, useState } from "react";
 import {useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import axios from "axios";
 
+const schema = yup.object({
+  oldPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50),
+  newPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50),
+  confirmPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50).oneOf([yup.ref("newPassword")], "Password not match"),
+  //phone:yup.string().required("Address is required").min(5,"Address must be at least 3 character").max(20),
+});
 
 const Security = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   let navigate = useNavigate([]);
-
   const [buyer, setBuyer] = useState([]);
   const [login, setLogin] = useState([]);
   const [loginCount, setLoginCount] = useState([]);
+  const [msg, setMsg] = useState([]);
+
 
   // Password toggle handler
   const togglePassword = () => {
@@ -61,6 +72,40 @@ const Security = () => {
         navigate("/login");
       });
   }, []);
+
+  const { handleSubmit, register, formState:{errors} } = useForm({
+    resolver:yupResolver(schema),
+  });
+
+  console.log(errors);
+
+  const formSubmit = (data) => {
+    console.log(data);
+    buyerAxiosConfig
+        .post("http://127.0.0.1:8000/api/buyer/security/update",data)
+        .then((resp) => {
+          if (resp.status == 200) {
+            console.log(resp.data);
+            setMsg(resp.data);
+            //localStorage.setItem("emailCode", resp.data);
+            //alert("Verify your email to continue");
+            // <Link to="https://mail.google.com/mail/"></Link>
+            //navigate('/buyer/registration3');
+            //localStorage.clear();
+          }
+          else if(resp.status == 203){
+            console.log(resp.data);
+            setMsg(resp.data);
+          }
+          else{
+            console.log(resp.data);
+          }
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
 
   return (
     <div>
@@ -190,7 +235,7 @@ const Security = () => {
                   </div>
                   <div className="card-body px-0 pb-2">
                     <div className="my-security">
-                      <form>
+                      <form onSubmit={handleSubmit(formSubmit)}>
                         <label>
                           Old Password <span>*</span>
                         </label>
@@ -199,7 +244,7 @@ const Security = () => {
                           type={passwordShown ? "text" : "password"}
                           placeholder="Enter password"
                           name="old_password"
-                          value="{{old('old_password')}}"
+                          {...register("oldPassword")}
                         />
                         {/* @if ($errors->has('old_password'))
                                 <span>
@@ -207,6 +252,8 @@ const Security = () => {
                                 </span>
                             @endif */}
                         <label>
+                        <span> <p>{errors.oldPassword?.message}</p> </span>
+                        <span> <p>{msg}</p> </span>
                           New Password <span>*</span>
                         </label>
                         <br />
@@ -214,8 +261,11 @@ const Security = () => {
                           type={passwordShown ? "text" : "password"}
                           placeholder="Enter password"
                           name="password"
-                          value="{{old('password')}}"
+                          {...register("newPassword")}
+
                         />
+                        <span> <p>{errors.newPassword?.message}</p> </span>
+
                         {/* @if ($errors->has('password'))
                                 <span>
                                     <p>{{$errors->first("password")}}</p>
@@ -229,8 +279,10 @@ const Security = () => {
                           type={passwordShown ? "text" : "password"}
                           placeholder="Re-enter password"
                           name="password_confirmation"
-                          value="{{old('password_confirmation')}}"
+                          {...register("confirmPassword")}
                         />
+                        <span> <p>{errors.confirmPassword?.message}</p> </span>
+
                         {/* @if ($errors->has('password_confirmation'))
                                 <span>
                                     <p>{{$errors->first("password_confirmation")}}</p>
@@ -250,7 +302,7 @@ const Security = () => {
                           Show Password
                         </label>
                         <br />
-                        <input type="submit" name="submit" value="Save" />
+                        <button className="btn btn-warning text-xm">Save</button>
                       </form>
                     </div>
                   </div>
@@ -287,7 +339,7 @@ const Security = () => {
                       {login.map(log => (
 
 
-                      <div className="timeline-block mb-3">
+                      <div className="timeline-block mb-3" key={log.id}>
                         <span className="timeline-step">
                           <i className="material-icons text-danger text-gradient">
                             <FontAwesomeIcon icon={faKey}></FontAwesomeIcon>

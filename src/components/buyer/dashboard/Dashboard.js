@@ -53,7 +53,8 @@ const Dashboard = () => {
           setPost(resp.data.post);
           setBuyer(resp.data.buyer);
           setOrders(resp.data.user.my_order);
-          setMyPost(resp.data);
+          setMyPost(resp.data.myPost);
+          console.log(resp.data);
           
         }
         else{
@@ -376,7 +377,7 @@ const Dashboard = () => {
                                   <div className="progress-info">
                                     <div className="progress-percentage">
                                       <span className="text-xs font-weight-bold text-secondary">
-                                        {order.status}
+                                        {order.status + "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -402,7 +403,7 @@ const Dashboard = () => {
                 <div className="col-lg-4 col-md-6">
                   <div className="card h-100 ">
                     <div className="card-header pb-0">
-                      <h6>Posts overview</h6>
+                      <h6>New Bids</h6>
                       <p className="text-sm">
                         <i className="text-success" aria-hidden="true"></i>
                         <span className="font-weight-bold">24%</span> this month
@@ -411,7 +412,7 @@ const Dashboard = () => {
                     <div className="card-body p-3">
                       <div className="timeline timeline-one-side order-history-body">
                         
-                        {/* {myPost.map(post => (                         */}
+                        {myPost.map(post => (                        
                         <div className="timeline-block mb-3">
                           <span className="timeline-step">
                             <i className="text-success text-gradient">
@@ -422,17 +423,24 @@ const Dashboard = () => {
                             <h6 className="text-dark text-sm font-weight-bold mb-0">
                               <a
                                 href="/buyer/post/details/{{$item2->post->id}}"
-                                className="text-secondary"
+                                // className="text-secondary"
                               >
-                                New Bid
+                                {post.seller}
                               </a>
                             </h6>
-                            <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                              bid_date
+                            <p className="text-secondary font-weight-bold text-xxs mt-0 mb-0">
+                              {post.date}
                             </p>
+                            <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                              {post.postTitle}
+                            </p>
+                            <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                              {"Offered price: $"+ post.amount}
+                            </p>
+                            
                           </div>
                         </div>
-                        {/* ))} */}
+                       ))} 
                         
                       </div>
                     </div>
