@@ -1,8 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import {useNavigate } from "react-router-dom";
+import buyerAxiosConfig from "../dashboard/buyerAxiosConfig";
 
 const Header2 = () => {
+  let navigate = useNavigate([]);
+
+  const logSubmit = () => {
+    buyerAxiosConfig
+      .get("/buyer/logout")
+      .then((resp) => {
+        console.log(resp.data);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+
+      });
+  }
+
   return (
     <header>
       <div className="nav-bar">
@@ -15,8 +32,8 @@ const Header2 = () => {
             <Link to="/buyer/dashboard">My Dashboard</Link>
             <Link to="/buyer/job/all">Browse Jobs</Link>
             <Link to="/buyer/post/job">Post Job</Link>
-            <Link to="/buyer/logout">
-              <span className="text-danger">Logout</span>
+            <Link to="">
+              <span className="text-danger" onClick={logSubmit}>Logout</span>
             </Link>
           </div>
         </div>
