@@ -30,7 +30,7 @@ const Header2 = () => {
         <div className="navigation">
           <div className="nav-items">
             <Link to="/buyer/dashboard">My Dashboard</Link>
-            <Link to="/buyer/job/all">Browse Jobs</Link>
+            <Link to="/buyer/post/get">Browse Jobs</Link>
             <Link to="/buyer/post/job">Post Job</Link>
             <Link to="">
               <span className="text-danger" onClick={logSubmit}>Logout</span>

@@ -14,7 +14,7 @@ const Login = () => {
   let navigate = useNavigate([]);
 
   const loginSubmit = () => {
-    
+
     axios.get("https://api.ipify.org/?format=json").then((resp_ip) => {
       let obj = {
         email: email,
@@ -36,22 +36,24 @@ const Login = () => {
             localStorage.setItem("buyer", JSON.stringify(user));
             setStatus("Correct");
             navigate('/buyer/profile/get');
-            
+
           }
-          else if(resp.status == 203){
+          else if (resp.status == 203) {
             setStatus(resp.data);
           }
-          else{
+          else {
             console.log(resp.data);
           }
-          
+
           //console.log(localStorage.getItem("user"));
-          
+
         })
         .catch((err) => {
           console.log(err);
         });
     });
+
+
   };
 
   return (

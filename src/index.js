@@ -13,6 +13,7 @@ import Registration3 from "./components/buyer/registration/Registration3";
 import Dashboard from "./components/buyer/dashboard/Dashboard";
 import Profile from "./components/buyer/dashboard/Profile";
 import Security from "./components/buyer/dashboard/Security";
+import Posts from "./components/buyer/Posts";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,6 +33,7 @@ root.render(
         <Route path="/buyer/dashboard" element={<Dashboard />}></Route>
         <Route path="/buyer/profile/get" element={<Profile />}></Route>
         <Route path="/buyer/security/get" element={<Security />}></Route>
+        <Route path="/buyer/post/:id" element={<Posts />}></Route>
 
         {/* #########################  FOR SELLER  ######################### */}
         {/* seller routes here */}
