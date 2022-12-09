@@ -14,6 +14,7 @@ import Dashboard from "./components/buyer/dashboard/Dashboard";
 import Profile from "./components/buyer/dashboard/Profile";
 import Security from "./components/buyer/dashboard/Security";
 import Posts from "./components/buyer/Posts";
+import Details from "./components/buyer/Details";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,6 +35,8 @@ root.render(
         <Route path="/buyer/profile/get" element={<Profile />}></Route>
         <Route path="/buyer/security/get" element={<Security />}></Route>
         <Route path="/buyer/post/:id" element={<Posts />}></Route>
+        <Route path="/buyer/post/details/:id" element={<Details />}></Route>
+
 
         {/* #########################  FOR SELLER  ######################### */}
         {/* seller routes here */}
