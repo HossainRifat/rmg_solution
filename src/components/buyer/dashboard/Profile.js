@@ -25,26 +25,48 @@ import bgI from "../img/profile_rh140025@gmail.com.jpg";
 const Profile = () => {
   const [buyer, setBuyer] = useState([]);
   let navigate = useNavigate([]);
-  
+
   useEffect(() => {
     buyerAxiosConfig
       .get("/buyer/profile/get")
       .then((resp) => {
-        if(resp.status == 200){
+        if (resp.status == 200) {
           console.log(resp.data);
           setBuyer(resp.data);
         }
-        else{
+        else {
           console.log(resp.data);
           navigate("/login");
         }
-        
+
       })
       .catch((err) => {
         console.log(err);
         navigate("/login");
       });
   }, []);
+
+  const Delete = () => {
+    buyerAxiosConfig
+      .get("/buyer/delete")
+      .then((resp) => {
+        if (resp.status == 200) {
+          console.log(resp.data);
+          localStorage.clear();
+          navigate("/login");
+
+        }
+        else {
+          console.log(resp.data);
+          navigate("/login");
+        }
+
+      })
+      .catch((err) => {
+        console.log(err);
+        //navigate("/login");
+      });
+  }
 
   return (
     <div>
@@ -163,7 +185,7 @@ const Profile = () => {
           <div className="container-fluid px-2 px-md-4">
             <div
               className="page-header min-height-100 border-radius-xl mt-4"
-              //   style="background-color:rgb(126, 114, 216); opacity:.8;"
+            //   style="background-color:rgb(126, 114, 216); opacity:.8;"
             >
               <span className="mask  opacity-6"></span>
             </div>
@@ -172,6 +194,7 @@ const Profile = () => {
                 className="btn btn-danger  position-absolute top-4 end-4 col-md-1 text-light"
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
+                onClick={Delete}
               >
                 Delete
               </button>

@@ -5,15 +5,15 @@ import "./Registration.css";
 import { Link } from "react-router-dom";
 import bgI from "../img/reg.png";
 import { useForm } from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
 const schema = yup.object({
-  password:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50),
-  confirmPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50).oneOf([yup.ref("password")], "Password not match"),
+  password: yup.string().required("Password is required").min(8, "Password must be at least 8 character").max(50),
+  confirmPassword: yup.string().required("Password is required").min(8, "Password must be at least 8 character").max(50).oneOf([yup.ref("password")], "Password not match"),
   //phone:yup.string().required("Address is required").min(5,"Address must be at least 3 character").max(20),
 });
 
@@ -22,13 +22,13 @@ const Registration3 = () => {
   let navigate = useNavigate([]);
 
 
-  const { handleSubmit, register, formState:{errors} } = useForm({
-    resolver:yupResolver(schema),
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
 
   console.log(errors);
 
-  if(localStorage.getItem("reg2") == null){
+  if (localStorage.getItem("reg2") == null) {
     console.log("back");
   }
 
@@ -47,27 +47,28 @@ const Registration3 = () => {
     console.log(buyer);
 
     axios
-        .post("http://127.0.0.1:8000/api/buyer/registration3",buyer)
-        .then((resp) => {
-          if (resp.status == 200) {
-            console.log(resp.data);
-            //localStorage.setItem("emailCode", resp.data);
-            //alert("Verify your email to continue");
-            // <Link to="https://mail.google.com/mail/"></Link>
-            //navigate('/buyer/registration3');
-            localStorage.clear();
-          }
-          else if(resp.status == 203){
-            console.log(resp.data);
-          }
-          else{
-            console.log(resp.data);
-          }
+      .post("http://127.0.0.1:8000/api/buyer/registration3", buyer)
+      .then((resp) => {
+        if (resp.status == 200) {
+          console.log(resp.data);
+          //localStorage.setItem("emailCode", resp.data);
+          //alert("Verify your email to continue");
+          // <Link to="https://mail.google.com/mail/"></Link>
+          localStorage.clear();
+          navigate('/login');
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        }
+        else if (resp.status == 203) {
+          console.log(resp.data);
+        }
+        else {
+          console.log(resp.data);
+        }
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
 
@@ -113,13 +114,13 @@ const Registration3 = () => {
                   id="confirmPassword"
                   {...register("confirmPassword")}
 
-                  //value="{{old('password_confirmation')}}"
+                //value="{{old('password_confirmation')}}"
                 />
                 <span> <p>{errors.confirmPassword?.message}</p> </span>
 
                 <button>
-                Next
-              </button>
+                  Next
+                </button>
               </form>
             </div>
           </div>

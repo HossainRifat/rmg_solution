@@ -8,17 +8,17 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup.object({
-  first_name:yup.string().required("Name is required").min(3,"Name must be at least 3 character").max(50).matches(/^[a-zA-Z ,.'-]+$/,"Invalid name"),
-  last_name:yup.string().required("Name is required").min(3,"Name must be at least 3 character").max(50).matches(/^[a-zA-Z ,.'-]+$/,"Invalid name"),
-  address:yup.string().required("Address is required").min(3,"Address must be at least 3 character").max(1000).matches(/^[#.0-9a-zA-Z\s,-]+$/i,"Invalid address"),
-  dob:yup.string().required("Date-of-birth is required"),
-  gender:yup.string("Gender is required").required("Gender is Required").nullable(),
-  email:yup.string().required("Email is required").email("Invalid email"),
-
+  first_name: yup.string().required("Name is required").min(3, "Name must be at least 3 character").max(50).matches(/^[a-zA-Z ,.'-]+$/, "Invalid name"),
+  last_name: yup.string().required("Name is required").min(3, "Name must be at least 3 character").max(50).matches(/^[a-zA-Z ,.'-]+$/, "Invalid name"),
+  address: yup.string().required("Address is required").min(3, "Address must be at least 3 character").max(1000).matches(/^[#.0-9a-zA-Z\s,-]+$/i, "Invalid address"),
+  dob: yup.string().required("Date-of-birth is required"),
+  gender: yup.string("Gender is required").required("Gender is Required").nullable(),
+  email: yup.string().required("Email is required").email("Invalid email"),
+  photo: yup.mixed().required('A file is required'),
 
 });
 
@@ -33,38 +33,38 @@ const Registration = () => {
   let [photo, set_photo] = useState("");
   let navigate = useNavigate([]);
 
-  const { handleSubmit, register, formState:{errors} } = useForm({
-    resolver:yupResolver(schema),
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
 
   console.log(errors);
 
   const formSubmit = (data) => {
-    console.log(JSON.stringify(data));
+    console.log(data.photo[0]);
     axios
-        .post("http://127.0.0.1:8000/api/buyer/registration1",data)
-        .then((resp) => {
-          if (resp.status == 200) {
-            console.log(resp.data);
-            localStorage.setItem("emailCode", resp.data);
-            localStorage.setItem("reg1", JSON.stringify(data));
-            alert("Verify your email to continue");
-            <Link to="https://mail.google.com/mail/"></Link>
-            //navigate('/buyer/registration2');
-          }
-          else if(resp.status == 203){
-            console.log(resp.data);
-          }
-          else{
-            console.log(resp.data);
-          }
+      .post("http://127.0.0.1:8000/api/buyer/registration1", data)
+      .then((resp) => {
+        if (resp.status == 200) {
+          console.log(resp.data);
+          localStorage.setItem("emailCode", resp.data);
+          localStorage.setItem("reg1", JSON.stringify(data));
+          alert("Verify your email to continue");
+          <Link to="https://mail.google.com/mail/"></Link>
+          //navigate('/buyer/registration2');
+        }
+        else if (resp.status == 203) {
+          console.log(resp.data);
+        }
+        else {
+          console.log(resp.data);
+        }
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  
+
   // const regSubmit = () => {
 
   //   let obj = {
@@ -78,7 +78,7 @@ const Registration = () => {
 
   //   console.log(obj);
 
-    
+
   // }
 
 
@@ -111,7 +111,7 @@ const Registration = () => {
                   //value={first_name}
                   // onChange={(e) => set_first_name(e.target.value)}
                   {...register("first_name")}
-                 
+
                 />
                 <span> <p>{errors.first_name?.message}</p> </span>
                 <label>Last Name</label>
@@ -150,8 +150,8 @@ const Registration = () => {
                     //value="{{old('gender')}}"
                     // value={first_name}
                     // onChange={(e) => set_gender(e.target.value)}
-                  {...register("gender")}
-                  
+                    {...register("gender")}
+
                   />
 
                   <label>Male</label>
@@ -162,7 +162,7 @@ const Registration = () => {
                     className="form-check-input"
                     //value={first_name}
                     // onChange={(e) => set_gender(e.target.value)}
-                  {...register("gender")}
+                    {...register("gender")}
 
                   />
 
@@ -174,7 +174,7 @@ const Registration = () => {
                     className="form-check-input"
                     //value={first_name}
                     // onChange={(e) => set_gender(e.target.value)}
-                  {...register("gender")}
+                    {...register("gender")}
 
                   />
                   <label>Other</label>
@@ -198,10 +198,13 @@ const Registration = () => {
                   type="file"
                   placeholder="Enter your profile picture"
                   className="form-control"
-                  id="formFile"
-                  //id="photo"
-                  //value="{{old('photo')}}"
+                  id="photo"
+                  {...register("photo")}
+                //id="photo"
+                //value="{{old('photo')}}"
                 />
+                <span> <p>{errors.formFile?.message}</p> </span>
+
                 <label>Address</label>
                 <textarea
                   id="address"
@@ -215,12 +218,12 @@ const Registration = () => {
                 <span> <p>{errors.address?.message}</p> </span>
 
                 <button>
-                {/* <Link to="/buyer/registration2">Next</Link> */}
-                Next
-              </button>
+                  {/* <Link to="/buyer/registration2">Next</Link> */}
+                  Next
+                </button>
               </form>
 
-              
+
             </div>
           </div>
         </div>
