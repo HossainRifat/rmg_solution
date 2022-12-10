@@ -91,8 +91,8 @@ const Posts = () => {
                     <div className="col-md-10">
                         {posts.map(post => (
                             <div className="row p-2 bg-white border rounded posts-shad">
-                                <div className="col-md-3 mt-1"><img className="img-fluid img-responsive rounded product-image" src="https://i.imgur.com/QpjAiHq.jpg" /></div>
-                                <div className="col-md-6 mt-1">
+                                <div className="col-md-3 mt-1"><img className="img-fluid img-responsive rounded product-image" src={"/" + post.photo} /></div>
+                                < div className="col-md-6 mt-1">
                                     <h5>{post.title}</h5>
                                     <span className="text-xs">{post.post_date}</span>
                                     <div className="d-flex flex-row">

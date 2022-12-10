@@ -16,6 +16,18 @@ import Security from "./components/buyer/dashboard/Security";
 import Posts from "./components/buyer/Posts";
 import Details from "./components/buyer/Details";
 
+import SHome from './components/seller/Home';
+import SHead from './components/seller/Head';
+import SFoot from './components/seller/Foot';
+import SProfile from './components/seller/Profile';
+import SPosts from './components/seller/Posts';
+import SLogin from './components/seller/Login';
+import SLogout from './components/seller/Logout';
+import SContact from './components/seller/Contact';
+import SPostDetails from './components/seller/PostDetails';
+import SRegister from './components/seller/Register';
+import Bid from "./components/seller/Bid";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -38,7 +50,19 @@ root.render(
         <Route path="/buyer/post/details/:id" element={<Details />}></Route>
 
 
+
         {/* #########################  FOR SELLER  ######################### */}
+        <Route path='/seller' element={<SHome />} />
+        <Route path='/seller/profile' element={<SProfile />} />
+        <Route path='/seller/contact' element={<SContact />} />
+        <Route path='/seller/posts' element={<SPosts />} />
+        <Route path='/seller/postdetails/:id' element={<SPostDetails />} />
+        <Route path='/seller/login' element={<SLogin />} />
+        <Route path='/seller/logout' element={<SLogout />} />
+        <Route path='/seller/sellerregister' element={<SRegister />} />
+        <Route path='/seller/bids' element={<Bid />} />
+
+
         {/* seller routes here */}
       </Routes>
     </Router>

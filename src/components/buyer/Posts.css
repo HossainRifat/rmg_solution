@@ -132,10 +132,17 @@
 .posts-shad{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     margin-bottom: 20px;
+    /* height: 300px; */
 }
 
 .border-left{
     border-left: solid;
     border-left-color: #6a59d1;
     border-width: 1px;
+}
+
+.product-image{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    width: 200px;
+    height: 230px;
 }

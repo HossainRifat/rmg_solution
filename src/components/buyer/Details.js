@@ -79,7 +79,7 @@ const Details = () => {
 
                             <div className="col-lg-5 d-none d-lg-block">
                                 <div className="banner-img pt-5">
-                                    <img src="https://i.imgur.com/QpjAiHq.jpg" alt="" className="img-fluid w-100 sticky-top" />
+                                    <img src={"/" + post.photo} alt="" className="img-fluid w-100 sticky-top" />
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ const Details = () => {
                                     </div>
                                     <div className="align-items-center align-content-center col-md-3 border-left mt-1">
                                         <div className="d-flex flex-row align-items-center">
-                                            <h4 className="mr-1">${post.price}</h4><span className="strike-text">{" per unit"}</span>
+                                            <h4 className="mr-1">${post.price}</h4><span className="strike-text">{" total"}</span>
                                         </div>
                                         <h6 className="text-success">Delivery</h6>
                                         <h6 className="text-success">{post.bid_date}</h6><br /><br /><br />

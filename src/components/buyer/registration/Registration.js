@@ -37,10 +37,12 @@ const Registration = () => {
     resolver: yupResolver(schema),
   });
 
+
+
   console.log(errors);
 
   const formSubmit = (data) => {
-    console.log(data.photo[0]);
+
     axios
       .post("http://127.0.0.1:8000/api/buyer/registration1", data)
       .then((resp) => {
@@ -195,15 +197,18 @@ const Registration = () => {
 
                 <label>Profile Picture</label>
                 <input
+                  name="image"
                   type="file"
                   placeholder="Enter your profile picture"
                   className="form-control"
-                  id="photo"
+                  id="image"
                   {...register("photo")}
                 //id="photo"
-                //value="{{old('photo')}}"
+                //value={photo}
+                //onChange={(e) => set_photo(e.target.value)}
+
                 />
-                <span> <p>{errors.formFile?.message}</p> </span>
+                <span> <p>{errors.photo?.message}</p> </span>
 
                 <label>Address</label>
                 <textarea

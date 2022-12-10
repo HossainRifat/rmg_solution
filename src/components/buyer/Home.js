@@ -53,7 +53,7 @@ const Home = () => {
                     </div>
                     <div className="main-button-blur">
                       <div className="scroll-to-section">
-                        <Link to="/registration/seller">
+                        <Link to="/seller">
                           Register as a Garments owner
                         </Link>
                       </div>
