@@ -5,6 +5,9 @@ import "./Login.css";
 import bgI from "./img/login.jpg";
 import { browserName, osName } from "react-device-detect";
 import { Route, useNavigate, useHis } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import { Alert } from "react-bootstrap";
+
 
 const Login = () => {
   let [status, setStatus] = useState("");
@@ -49,11 +52,38 @@ const Login = () => {
 
         })
         .catch((err) => {
-          console.log(err);
+
         });
     });
 
 
+  };
+
+  const forgetSubmit = () => {
+    console.log(email);
+    let obj = {
+      email: email,
+    };
+    axios
+      .post("http://127.0.0.1:8000/api/buyer/forget", obj)
+      .then((resp) => {
+        if (resp.status == 200) {
+          alert("Password reset email sent.");
+          console.log(resp.data);
+        }
+        else if (resp.status == 203) {
+          setStatus(resp.data);
+        }
+        else {
+          console.log(resp.data);
+        }
+
+        //console.log(localStorage.getItem("user"));
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -92,15 +122,14 @@ const Login = () => {
                   <p id="output">{status}</p>
                 </span>
 
-                <input
+                {/* <input
                   className="form-check-input"
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
                   name="logedin"
-                />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                  Stay logged in.
+                /> */}
+                <label className="form-check-label text-warning" onClick={forgetSubmit}>Forgot Password?
                 </label>
                 <br />
               </form>

@@ -80,53 +80,62 @@ const SRegister = () => {
         <Form onSubmit={registerSubmit}>
 
             <MDBContainer fluid>
-
                 <MDBCard className='text-black m-5' style={{ borderRadius: '25px' }}>
                     <MDBCardBody>
                         <MDBRow>
                             <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
+                                <MDBCol md='12' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
 
-                                <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                    <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                                <div className="d-flex flex-row align-items-center mb-4 ">
-                                    <MDBIcon fas icon="user me-3" size='lg' />
-                                    <MDBInput label='First Name' name="first_name" id='form1' type='text' className='w-100' value={first_name} onChange={(first_name) => setFname(first_name.target.value)} />
-                                    <span> <p>{errors.first_name?.message}</p> </span>
-                                </div>
-                                <div className="d-flex flex-row align-items-center mb-4 ">
-                                    <MDBIcon fas icon="user me-3" size='lg' />
-                                    <MDBInput label='Last Name' id='form1' type='text' className='w-100' value={last_name} onChange={(last_name) => setLname(last_name.target.value)} />
-                                    <span> <p>{errors.last_name?.message}</p> </span>
-                                </div>
-
-                                <div className="d-flex flex-row align-items-center mb-4">
-                                    <MDBIcon fas icon="envelope me-3" size='lg' />
-                                    <MDBInput label='Your Email' id='form2' type='email' value={email} onChange={(email) => setEmail(email.target.value)} />
                                     <span> <p>{errors.email?.message}</p> </span>
-                                </div>
 
-                                <div className="d-flex flex-row align-items-center mb-4">
-                                    <MDBIcon fas icon="lock me-3" size='lg' />
-                                    <MDBInput label='Password' id='form3' type='password' onChange={(password) => setPassword(password.target.value)} />
-                                </div>
+                                    <div className="d-flex flex-row align-items-center mb-4 ">
+                                        <MDBIcon fas icon="user me-3" size='lg' />
+                                        <MDBInput label='Photo' id='form1' type='file' className='w-100' value={last_name} onChange={(last_name) => setLname(last_name.target.value)} />
+                                        <span> <p>{errors.last_name?.message}</p> </span>
+                                    </div>
 
-                                <div className="d-flex flex-row align-items-center mb-4">
-                                    <MDBIcon fas icon="key me-3" size='lg' />
-                                    <MDBInput label='Repeat your password' id='form4' type='password' />
-                                </div>
+                                    <div className="d-flex flex-row align-items-center mb-4 ">
+                                        <MDBIcon fas icon="user me-3" size='lg' />
+                                        <MDBInput label='NID' id='form1' type='file' className='w-100' value={last_name} onChange={(last_name) => setLname(last_name.target.value)} />
+                                        <span> <p>{errors.last_name?.message}</p> </span>
+                                    </div>
 
-                                <div className='mb-4'>
-                                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-                                </div>
+                                    <div className="d-flex flex-row align-items-center mb-4 ">
+                                        <MDBIcon fas icon="user me-3" size='lg' />
+                                        <MDBInput label='Passport' id='form1' type='file' className='w-100' value={last_name} onChange={(last_name) => setLname(last_name.target.value)} />
+                                        <span> <p>{errors.last_name?.message}</p> </span>
+                                    </div>
 
-                                <MDBBtn className='mb-4' size='lg'>Register</MDBBtn>
+                                    <div className="d-flex flex-row align-items-center mb-4 ">
+                                        <MDBIcon fas icon="user me-3" size='lg' />
+                                        <MDBInput label='Account' id='form1' type='file' className='w-100' value={last_name} onChange={(last_name) => setLname(last_name.target.value)} />
+                                        <span> <p>{errors.last_name?.message}</p> </span>
+                                    </div>
 
+                                    <div className="d-flex flex-row align-items-center mb-4">
+                                        <MDBIcon fas icon="lock me-3" size='lg' />
+                                        <MDBInput label='Password' id='form3' type='password' onChange={(password) => setPassword(password.target.value)} />
+                                    </div>
+
+                                    <div className="d-flex flex-row align-items-center mb-4">
+                                        <MDBIcon fas icon="key me-3" size='lg' />
+                                        <MDBInput label='Repeat your password' id='form4' type='password' />
+                                    </div>
+
+                                    <div className='mb-4'>
+                                        <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
+                                    </div>
+
+                                    <MDBBtn className='mb-4' size='lg'>Register</MDBBtn>
+
+                                </MDBCol>
+
+                                <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
+                                    <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid />
+                                </MDBCol>
                             </MDBCol>
-
-                            <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-                                <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid />
-                            </MDBCol>
-
                         </MDBRow>
                     </MDBCardBody>
                 </MDBCard>

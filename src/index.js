@@ -26,7 +26,9 @@ import SLogout from './components/seller/Logout';
 import SContact from './components/seller/Contact';
 import SPostDetails from './components/seller/PostDetails';
 import SRegister from './components/seller/Register';
-import Bid from "./components/seller/Bid";
+import SellerOrders from './components/seller/SellerOrders';
+import SellerBids from './components/seller/SellerBids';
+import { ContactUs } from "./components/buyer/TestMail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -48,6 +50,8 @@ root.render(
         <Route path="/buyer/security/get" element={<Security />}></Route>
         <Route path="/buyer/post/:id" element={<Posts />}></Route>
         <Route path="/buyer/post/details/:id" element={<Details />}></Route>
+        <Route path="/tm" element={<ContactUs />}></Route>
+
 
 
 
@@ -60,7 +64,8 @@ root.render(
         <Route path='/seller/login' element={<SLogin />} />
         <Route path='/seller/logout' element={<SLogout />} />
         <Route path='/seller/sellerregister' element={<SRegister />} />
-        <Route path='/seller/bids' element={<Bid />} />
+        <Route path='/sellerorders' element={<SellerOrders />} />
+        <Route path='/sellerbids' element={<SellerBids />} />
 
 
         {/* seller routes here */}

@@ -7,15 +7,15 @@ import bgI from "../img/reg.png";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 
 
 const schema = yup.object({
-  nid:yup.string().required("Name is required").min(3,"Name must be at least 3 character").max(50),
-  passport:yup.string().required("Name is required").min(3,"Name must be at least 3 character").max(50),
-  phone:yup.string().required("Address is required").min(5,"Address must be at least 3 character").max(20),
+  nid: yup.string().required("NID is required").min(8, "NID must be at least 8 character").max(50),
+  passport: yup.string().required("Passport is required").min(5, "Passport must be at least 5 character").max(50),
+  phone: yup.string().required("Phone is required").min(11, "Phone must be at least 11 character").max(20),
 });
 
 const Registration2 = () => {
@@ -28,17 +28,17 @@ const Registration2 = () => {
   // console.log(localStorage.getItem("emailCode") != useParams().id);
 
   useEffect(() => {
-  if(id != emailCode){
-    navigate('/buyer/registration');
-  }
-  },[]);
+    if (id != emailCode) {
+      navigate('/buyer/registration');
+    }
+  }, []);
 
   // if(localStorage.getItem("emailCode") != useParams().id){
   //   navigate('/buyer/registration');
   // }
 
-  const { handleSubmit, register, formState:{errors} } = useForm({
-    resolver:yupResolver(schema),
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
 
   console.log(errors);
@@ -46,28 +46,28 @@ const Registration2 = () => {
   const formSubmit = (data) => {
     console.log(data);
     axios
-        .post("http://127.0.0.1:8000/api/buyer/registration2",data)
-        .then((resp) => {
-          if (resp.status == 200) {
-            console.log(resp.data);
-            //localStorage.setItem("emailCode", resp.data);
-            //alert("Verify your email to continue");
-            // <Link to="https://mail.google.com/mail/"></Link>
-            localStorage.setItem("reg2", JSON.stringify(data));
+      .post("http://127.0.0.1:8000/api/buyer/registration2", data)
+      .then((resp) => {
+        if (resp.status == 200) {
+          console.log(resp.data);
+          //localStorage.setItem("emailCode", resp.data);
+          //alert("Verify your email to continue");
+          // <Link to="https://mail.google.com/mail/"></Link>
+          localStorage.setItem("reg2", JSON.stringify(data));
 
-            navigate('/buyer/registration3');
-          }
-          else if(resp.status == 203){
-            console.log(resp.data);
-          }
-          else{
-            console.log(resp.data);
-          }
+          navigate('/buyer/registration3');
+        }
+        else if (resp.status == 203) {
+          console.log(resp.data);
+        }
+        else {
+          console.log(resp.data);
+        }
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
 
@@ -146,10 +146,10 @@ const Registration2 = () => {
                   name="documents"
                 />
                 <button>
-                Next
-              </button>
+                  Next
+                </button>
               </form>
-              
+
             </div>
           </div>
         </div>

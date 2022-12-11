@@ -50,91 +50,90 @@ const SPosts = () => {
     return (
         <div>
             <SHead></SHead>
-            <MDBContainer fluid className="my-5">
+            <MDBContainer fluid className="my-6">
                 <MDBRow>
-                    <Table striped bordered hover>
 
-                        {posts.map(post => (
-                            /*
-                            <tr key={post.id}>
-                                <td>{post.id}</td>
-                                <td>{post.title}</td>
-                                <td>{post.description}</td>
-                                <td>{post.quantity}</td>
-                                <td>{post.price}</td>
-                                <td>{post.post_date}</td>
-                                <td>{post.expire_date}</td>
-                                <td>{post.photo}</td>
-                                <td>{post.buyer_id}</td>
-                                <td>{post.status}</td>
-                                <td><Button variant="primary"><Link  to={"/postdetails/"+post.id} >Details</Link></Button></td>
-                                <td><Button variant="warning">Bid</Button></td>
-                            </tr>
-    */
-                            <MDBCol md="4" className="mb-5 mb-lg-0">
-                                <MDBCard className="text-black">
-                                    {/* {getPhoto(post)} */}
-                                    <MDBCardImage
-                                        src={photo}
-                                        position="top"
-                                        alt={post.title}
-                                    />
-                                    <MDBCardBody>
-                                        <div className="text-center mt-1">
-                                            <MDBCardTitle className="h4">{post.title}</MDBCardTitle>
-                                            <h6 className="text-primary mb-1 pb-3">Quantity: {post.quantity}</h6>
+                    {posts.map(post => (
+                        /*
+                        <tr key={post.id}>
+                            <td>{post.id}</td>
+                            <td>{post.title}</td>
+                            <td>{post.description}</td>
+                            <td>{post.quantity}</td>
+                            <td>{post.price}</td>
+                            <td>{post.post_date}</td>
+                            <td>{post.expire_date}</td>
+                            <td>{post.photo}</td>
+                            <td>{post.buyer_id}</td>
+                            <td>{post.status}</td>
+                            <td><Button variant="primary"><Link  to={"/postdetails/"+post.id} >Details</Link></Button></td>
+                            <td><Button variant="warning">Bid</Button></td>
+                        </tr>
+*/
+                        <MDBCol md="4" className="mb-5 mb-lg-0">
+                            <MDBCard className="text-black">
+                                {/* {getPhoto(post)} */}
+                                <MDBCardImage
+                                    src={photo}
+                                    position="top"
+                                    alt={post.title}
+                                />
+                                <MDBCardBody>
+                                    <div className="text-center mt-1">
+                                        <MDBCardTitle className="h4">{post.title}</MDBCardTitle>
+                                        <h6 className="text-primary mb-1 pb-3">Quantity: {post.quantity}</h6>
+                                    </div>
+                                    <div className="text-center">
+                                        <div
+                                            className="p-3 mx-n3 mb-4"
+                                            style={{ backgroundColor: "#eff1f2" }}
+                                        >
+                                            <h5 className="mb-0">Price: {post.price}</h5>
                                         </div>
-                                        <div className="text-center">
-                                            <div
-                                                className="p-3 mx-n3 mb-4"
-                                                style={{ backgroundColor: "#eff1f2" }}
-                                            >
-                                                <h5 className="mb-0">Price: {post.price}</h5>
-                                            </div>
 
-                                            <div className="d-flex flex-column mb-4">
-                                                <span className="h1 mt-4 mb-0"></span>
-                                                <span>Post Date: {post.post_date}</span>
-                                                <span>Expire Date: {post.expire_date}</span>
-                                            </div>
+                                        <div className="d-flex flex-column mb-4">
+                                            <span className="h1 mt-4 mb-0"></span>
+                                            <span>Post Date: {post.post_date}</span>
+                                            <span>Expire Date: {post.expire_date}</span>
+                                        </div>
 
-                                            <div className="d-flex flex-column mb-4">
-                                                <span className="h1 mb-0">
-                                                    <MDBIcon fas icon="camera-retro" />
-                                                </span>Description: <br />{post.description}
-                                            </div>
+                                        <div className="d-flex flex-column mb-4">
+                                            <span className="h1 mb-0">
+                                                <MDBIcon fas icon="camera-retro" />
+                                            </span>Description: <br />{post.description}
+                                        </div>
 
-                                            <div className="d-flex flex-column mb-4">
-                                                <span className="h1 mb-0">{post.status}</span>
-
-                                            </div>
-
-
+                                        <div className="d-flex flex-column mb-4">
+                                            <span className="h1 mb-0">{post.status}</span>
 
                                         </div>
 
-                                        <div className="d-flex flex-row">
+
+
+                                    </div>
+
+                                    <div className="d-flex flex-row">
+                                        <MDBBtn
+                                            color="primary"
+                                            rippleColor="dark"
+                                            className="flex-fill ms-1">
                                             <Link to={"/postdetails/" + post.id} >
-                                                <MDBBtn
-                                                    color="primary"
-                                                    rippleColor="dark"
-                                                    className="flex-fill ms-1">
-                                                    Details
-                                                </MDBBtn>
+                                                Details
                                             </Link>
-                                            <Link to={"/postdetails/" + post.id} >
-                                                <MDBBtn color="danger" className="flex-fill ms-2">
-                                                    Bid
-                                                </MDBBtn>
-                                            </Link>
-                                        </div>
-                                    </MDBCardBody>
-                                </MDBCard>
-                            </MDBCol>
+                                        </MDBBtn>
+                                        <Link to={"/postdetails/" + post.id} >
+                                            <MDBBtn color="danger" className="flex-fill ms-2">
+                                                Bid
+                                            </MDBBtn>
+                                        </Link>
+                                    </div>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
 
-                        ))}
+                    ))}
 
-                    </Table>
+
                 </MDBRow>
             </MDBContainer>
         </div>
