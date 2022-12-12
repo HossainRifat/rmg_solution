@@ -51,7 +51,7 @@ const SHead = () => {
     }
 
     return (
-        <div className="sidenav">
+        <div className="seller-sidenav">
             <Link className="list button" to="/seller">Home</Link>
             <Link className="list button" to="/seller/posts">Posts</Link>
             <Link className="list button" to="/sellerbids">Bids</Link>

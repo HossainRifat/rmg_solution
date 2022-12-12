@@ -21,7 +21,7 @@ import Header2 from "../header/Header2";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import buyerAxiosConfig from "./buyerAxiosConfig";
 
 
@@ -45,7 +45,7 @@ const Dashboard = () => {
     buyerAxiosConfig
       .get("/buyer/dashboard")
       .then((resp) => {
-        if(resp.status == 200){
+        if (resp.status == 200) {
           setBuyer(resp.data.buyer);
           setOrder(resp.data.order);
           setCheckout(resp.data.checkout);
@@ -54,14 +54,14 @@ const Dashboard = () => {
           setBuyer(resp.data.buyer);
           setOrders(resp.data.user.my_order);
           setMyPost(resp.data.myPost);
-          console.log(resp.data);
-          
+          console.log(resp.data.myPost);
+
         }
-        else{
+        else {
           console.log(resp.data);
           navigate("/login");
         }
-        
+
       })
       .catch((err) => {
         console.log(err);
@@ -326,7 +326,7 @@ const Dashboard = () => {
                             <span className="font-weight-bold ms-1">
                               {order + " "}
                             </span>
-                             orders
+                            orders
                           </p>
                         </div>
                       </div>
@@ -352,48 +352,48 @@ const Dashboard = () => {
                           </thead>
                           <tbody>
                             {orders.map(order => (
-                              
-                            <tr key={order.id}>
-                              <td>
-                                <div className="d-flex px-2 py-1">
-                                  <div></div>
-                                  <div className="d-flex flex-column justify-content-center">
-                                    <h6 className="mb-0 text-sm" >{order.title}</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="text-xs font-weight-bold text-secondary">
-                                  {order.delivery_date}
-                                </span>
-                              </td>
-                              <td className="align-middle text-center text-sm">
-                                <span className="text-xs font-weight-bold text-secondary">
-                                  {order.price}
-                                </span>
-                              </td>
-                              <td className="align-middle">
-                                <div className="progress-wrapper w-75 mx-auto">
-                                  <div className="progress-info">
-                                    <div className="progress-percentage">
-                                      <span className="text-xs font-weight-bold text-secondary">
-                                        {order.status + "%"}
-                                      </span>
+
+                              <tr key={order.id}>
+                                <td>
+                                  <div className="d-flex px-2 py-1">
+                                    <div></div>
+                                    <div className="d-flex flex-column justify-content-center">
+                                      <h6 className="mb-0 text-sm" >{order.title}</h6>
                                     </div>
                                   </div>
-                                  <div className="progress">
-                                    <div
-                                      className={"progress-bar bg-gradient-info w-" + order.status}
-                                      role="progressbar"
-                                      aria-valuenow={order.status}
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
+                                </td>
+                                <td>
+                                  <span className="text-xs font-weight-bold text-secondary">
+                                    {order.delivery_date}
+                                  </span>
+                                </td>
+                                <td className="align-middle text-center text-sm">
+                                  <span className="text-xs font-weight-bold text-secondary">
+                                    {order.price}
+                                  </span>
+                                </td>
+                                <td className="align-middle">
+                                  <div className="progress-wrapper w-75 mx-auto">
+                                    <div className="progress-info">
+                                      <div className="progress-percentage">
+                                        <span className="text-xs font-weight-bold text-secondary">
+                                          {order.status + "%"}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="progress">
+                                      <div
+                                        className={"progress-bar bg-gradient-info w-" + order.status}
+                                        role="progressbar"
+                                        aria-valuenow={order.status}
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                      ></div>
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                            </tr>
-))}
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -411,37 +411,37 @@ const Dashboard = () => {
                     </div>
                     <div className="card-body p-3">
                       <div className="timeline timeline-one-side order-history-body">
-                        
-                        {myPost.map(post => (                        
-                        <div className="timeline-block mb-3">
-                          <span className="timeline-step">
-                            <i className="text-success text-gradient">
-                              <FontAwesomeIcon icon={faBell}></FontAwesomeIcon>
-                            </i>
-                          </span>
-                          <div className="timeline-content">
-                            <h6 className="text-dark text-sm font-weight-bold mb-0">
-                              <a
-                                href="/buyer/post/details/{{$item2->post->id}}"
+
+                        {myPost.map(post => (
+                          <div className="timeline-block mb-3">
+                            <span className="timeline-step">
+                              <i className="text-success text-gradient">
+                                <FontAwesomeIcon icon={faBell}></FontAwesomeIcon>
+                              </i>
+                            </span>
+                            <div className="timeline-content">
+                              <h6 className="text-dark text-sm font-weight-bold mb-0">
+                                <Link
+                                  to={"/buyer/post/details/" + post.postId}
                                 // className="text-secondary"
-                              >
-                                {post.seller}
-                              </a>
-                            </h6>
-                            <p className="text-secondary font-weight-bold text-xxs mt-0 mb-0">
-                              {post.date}
-                            </p>
-                            <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                              {post.postTitle}
-                            </p>
-                            <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                              {"Offered price: $"+ post.amount}
-                            </p>
-                            
+                                >
+                                  {post.seller}
+                                </Link>
+                              </h6>
+                              <p className="text-secondary font-weight-bold text-xxs mt-0 mb-0">
+                                {post.date}
+                              </p>
+                              <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                {post.postTitle}
+                              </p>
+                              <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                {"Offered price: $" + post.amount}
+                              </p>
+
+                            </div>
                           </div>
-                        </div>
-                       ))} 
-                        
+                        ))}
+
                       </div>
                     </div>
                   </div>

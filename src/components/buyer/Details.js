@@ -16,7 +16,7 @@ const Details = () => {
     const [bid, setBid] = useState([]);
     const [price, setPrice] = useState([]);
     const [quantity, setQuantity] = useState([]);
-
+    let [bidId, setBidId] = useState([]);
 
 
     useEffect(() => {
@@ -43,6 +43,28 @@ const Details = () => {
                 //navigate("/login");
             });
     }, []);
+
+    const confirm = (id) => {
+        console.log("hello");
+        console.log(id);
+        buyerAxiosConfig
+            .get("/buyer/bid/confirm/" + id)
+            .then((resp) => {
+                if (resp.status == 200) {
+                    console.log(resp.data);;
+                    navigate("/buyer/dashboard");
+                }
+                else {
+                    console.log(resp.data);
+                    navigate("/login");
+                }
+
+            })
+            .catch((err) => {
+                console.log(err);
+                //navigate("/login");
+            });
+    }
 
     return (
         <div>
@@ -109,7 +131,8 @@ const Details = () => {
                                         </div>
                                         <h6 className="text-success">Delivery</h6>
                                         <h6 className="text-success">{post.bid_date}</h6><br /><br /><br />
-                                        <div className="d-flex flex-column mt-4"><Link className="btn btn-primary btn-sm" to={"/buyer/post/details/" + post.id}>Confirm</Link> </div>
+                                        <div className="d-flex flex-column mt-4">
+                                            <button className="btn btn-primary btn-sm" onClick={() => confirm(post.id)}>Confirm</button> </div>
                                     </div>
                                 </div>
                             ))}
