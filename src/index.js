@@ -29,6 +29,7 @@ import SRegister from './components/seller/Register';
 import SellerOrders from './components/seller/SellerOrders';
 import SellerBids from './components/seller/SellerBids';
 import { ContactUs } from "./components/buyer/TestMail";
+import BuyerContact from "./components/buyer/Contact";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -51,6 +52,8 @@ root.render(
         <Route path="/buyer/post/:id" element={<Posts />}></Route>
         <Route path="/buyer/post/details/:id" element={<Details />}></Route>
         <Route path="/tm" element={<ContactUs />}></Route>
+        <Route path="/buyer/contact" element={<BuyerContact />}></Route>
+
 
 
 
