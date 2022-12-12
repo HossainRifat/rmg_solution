@@ -31,6 +31,23 @@ import SellerBids from './components/seller/SellerBids';
 import { ContactUs } from "./components/buyer/TestMail";
 import BuyerContact from "./components/buyer/Contact";
 
+import AdminHome from "./components/admin/AdminHome";
+import AdminBuyerList from "./components/admin/AdminBuyerList";
+import AdminHead from "./components/admin/AdminHead";
+import AdminLogOut from "./components/admin/AdminLogOut";
+import AdminLogin from "./components/admin/AdminLogin";
+import AdminProductList from "./components/admin/AdminProductList";
+import AdminProfile from "./components/admin/AdminProfile";
+import AdminRegistration from "./components/admin/AdminRegistration";
+
+// import AdminHome from './components/AdminHome';
+// import AdminRegistration from './components/AdminRegistration';
+// import AdminLogin from './components/AdminLogin';
+// import AdminProfile from './components/AdminProfile';
+// import AdminBuyerList from './components/AdminBuyerList';
+// import AdminProductList from './components/AdminProductList';
+// import AdminLogOut from './components/AdminLogOut';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -38,6 +55,13 @@ root.render(
       <Routes>
         {/* #########################  FOR ADMIN  ######################### */}
         {/* admin routes here */}
+        <Route exact path='/admin' element={<AdminHome />} />
+        <Route exact path='/adminregistration' element={<AdminRegistration />} />
+        <Route exact path='/adminlogin' element={<AdminLogin />} />
+        <Route exact path='/adminprofile' element={<AdminProfile />} />
+        <Route exact path='/adminproduct' element={<AdminProductList />} />
+        <Route exact path='/adminbuyer' element={<AdminBuyerList />} />
+        <Route exact path='/adminlogout' element={<AdminLogOut />} />
 
         {/* #########################  FOR BUYER  ######################### */}
         {/* buyer routes here */}
