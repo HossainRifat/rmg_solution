@@ -22,16 +22,16 @@ import Header2 from "../header/Header2";
 import { Link } from "react-router-dom";
 import buyerAxiosConfig from "./buyerAxiosConfig";
 import { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 
 const schema = yup.object({
-  oldPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50),
-  newPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50),
-  confirmPassword:yup.string().required("Password is required").min(8,"Password must be at least 8 character").max(50).oneOf([yup.ref("newPassword")], "Password not match"),
+  oldPassword: yup.string().required("Password is required").min(8, "Password must be at least 8 character").max(50),
+  newPassword: yup.string().required("Password is required").min(8, "Password must be at least 8 character").max(50),
+  confirmPassword: yup.string().required("Password is required").min(8, "Password must be at least 8 character").max(50).oneOf([yup.ref("newPassword")], "Password not match"),
   //phone:yup.string().required("Address is required").min(5,"Address must be at least 3 character").max(20),
 });
 
@@ -55,17 +55,17 @@ const Security = () => {
     buyerAxiosConfig
       .get("/buyer/security/get")
       .then((resp) => {
-        if(resp.status == 200){
+        if (resp.status == 200) {
           console.log(resp.data.login.length);
           setBuyer(resp.data.user);
           setLogin(resp.data.login);
           setLoginCount(resp.data.login.length);
         }
-        else{
+        else {
           console.log(resp.data);
           navigate("/login");
         }
-        
+
       })
       .catch((err) => {
         console.log(err);
@@ -73,8 +73,8 @@ const Security = () => {
       });
   }, []);
 
-  const { handleSubmit, register, formState:{errors} } = useForm({
-    resolver:yupResolver(schema),
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
 
   console.log(errors);
@@ -82,29 +82,31 @@ const Security = () => {
   const formSubmit = (data) => {
     console.log(data);
     buyerAxiosConfig
-        .post("http://127.0.0.1:8000/api/buyer/security/update",data)
-        .then((resp) => {
-          if (resp.status == 200) {
-            console.log(resp.data);
-            setMsg(resp.data);
-            //localStorage.setItem("emailCode", resp.data);
-            //alert("Verify your email to continue");
-            // <Link to="https://mail.google.com/mail/"></Link>
-            //navigate('/buyer/registration3');
-            //localStorage.clear();
-          }
-          else if(resp.status == 203){
-            console.log(resp.data);
-            setMsg(resp.data);
-          }
-          else{
-            console.log(resp.data);
-          }
+      .post("http://127.0.0.1:8000/api/buyer/security/update", data)
+      .then((resp) => {
+        if (resp.status == 200) {
+          console.log(resp.data);
+          setMsg(resp.data);
+          //localStorage.setItem("emailCode", resp.data);
+          //alert("Verify your email to continue");
+          // <Link to="https://mail.google.com/mail/"></Link>
+          //navigate('/buyer/registration3');
+          //localStorage.clear();
+        }
+        else if (resp.status == 203) {
+          console.log(resp.data);
+          setMsg(resp.data);
+        }
+        else {
+          console.log(resp.data);
+        }
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+
+      });
   }
 
   return (
@@ -252,8 +254,8 @@ const Security = () => {
                                 </span>
                             @endif */}
                         <label>
-                        <span> <p>{errors.oldPassword?.message}</p> </span>
-                        <span> <p>{msg}</p> </span>
+                          <span> <p>{errors.oldPassword?.message}</p> </span>
+                          <span> <p>{msg}</p> </span>
                           New Password <span>*</span>
                         </label>
                         <br />
@@ -325,7 +327,7 @@ const Security = () => {
                             $i += 1;
                         }
                     } */}
-                      <span className="font-weight-bold">{loginCount+" active logins "}</span>
+                      <span className="font-weight-bold">{loginCount + " active logins "}</span>
 
                       <span>
                         <a href="" className="text-danger text-bold">
@@ -339,30 +341,30 @@ const Security = () => {
                       {login.map(log => (
 
 
-                      <div className="timeline-block mb-3" key={log.id}>
-                        <span className="timeline-step">
-                          <i className="material-icons text-danger text-gradient">
-                            <FontAwesomeIcon icon={faKey}></FontAwesomeIcon>
-                          </i>
-                        </span>
-                        <div className="timeline-content">
-                          <h6 className="text-dark text-sm font-weight-bold mb-0">
-                            {log.device}
-                          </h6>
-                          {/* @if ($item->token == Cookie::get('token')) */}
-                          {/* <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">This PC</p> */}
-                          {/* @else */}
-                          <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
-                              {""+log.location}
-                          </p>
-                          <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
-                            <a href="/buyer/logout/session/{{$item->token}}">
-                              {"IP "+log.ip}
-                            </a>
-                          </p>
-                          {/* @endif */}
+                        <div className="timeline-block mb-3" key={log.id}>
+                          <span className="timeline-step">
+                            <i className="material-icons text-danger text-gradient">
+                              <FontAwesomeIcon icon={faKey}></FontAwesomeIcon>
+                            </i>
+                          </span>
+                          <div className="timeline-content">
+                            <h6 className="text-dark text-sm font-weight-bold mb-0">
+                              {log.device}
+                            </h6>
+                            {/* @if ($item->token == Cookie::get('token')) */}
+                            {/* <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">This PC</p> */}
+                            {/* @else */}
+                            <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
+                              {"" + log.location}
+                            </p>
+                            <p className="text-primary font-weight-bold text-xs mt-1 mb-0">
+                              <a href="/buyer/logout/session/{{$item->token}}">
+                                {"IP " + log.ip}
+                              </a>
+                            </p>
+                            {/* @endif */}
+                          </div>
                         </div>
-                      </div>
 
                       ))}
 

@@ -35,7 +35,7 @@ const Posts = () => {
             })
             .catch((err) => {
                 console.log(err);
-                //navigate("/login");
+                navigate("/login");
             });
     }, [id]);
 

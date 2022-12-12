@@ -62,7 +62,7 @@ const Details = () => {
             })
             .catch((err) => {
                 console.log(err);
-                //navigate("/login");
+                navigate("/login");
             });
     }
 
